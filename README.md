@@ -1,10 +1,10 @@
-# microservice-template
+# notifications-microservice
 
-![checks status](https://github.com/delvify-assessment/microservice-template/actions/workflows/pr.yml/badge.svg)
+![checks status](https://github.com/delvify-assessment/notifications-microservice/actions/workflows/pr.yml/badge.svg)
 
 ## Description
 
-This is a template for a microservice based on FastAPI and Docker.
+A microservice for sending notifications based on FastAPI and Docker.
 
 ## Requirements
 
@@ -106,7 +106,7 @@ The pipeline runs the following steps:
 * Testing (every [push](.github/workflows/pr.yml))
 * Building and Pushing a Docker image to DockerHub (every [push to main](.github/workflows/deploy.yml))
 
-## Project structure
+## Project structure (FIX)
 
 ```
 ├── .github - GitHub Actions configuration (linting, testing, building and pushing Docker image)
@@ -115,25 +115,10 @@ The pipeline runs the following steps:
 ├── delvify - Service code
 │   ├── api - API endpoints
 │   ├── core - Core service code
-│   │   ├── db - Database configuration
 │   │   ├── di - Dependency injection
 │   │   ├── logger - Logging configuration
 │   │   ├── settings - Service settings
-│   ├── crud - Database CRUD operations
-│   ├── models - Database configuration
+│   │   ├── email_service - Email service
 │   ├── schemas - Pydantic schemas
 │   ├── main.py - Entrypoint
 ```
-
-## How to use template
-
-1. Create a new repository using this template
-2. Replace all occurrences of `microservice-template` with your service name
-3. For API requests that need user authorization use get_current_user_id() function from `delvify.core.di` module
-
-### If your microservice use a database
-
-1. Update last line of "settings.py"
-2. Update get_db() in di.py and uncomment import there
-3. Update docker-compose.yml
-4. Don't forget to generate migrations and migrate DB after changing models
