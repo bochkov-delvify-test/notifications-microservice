@@ -5,9 +5,9 @@ from fastapi import HTTPException, Request
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
-from delvify.core import app_settings
-
 # from .db import SessionLocal
+from .email_service import EmailService, StdoutEmailService
+from .settings import app_settings
 
 
 def get_db() -> Session:
@@ -50,3 +50,10 @@ def get_current_user_id(request: Request) -> Optional[int]:
 
     except JWTError:
         raise HTTPException(status_code=401, detail="JWT token could not be decoded.")
+
+
+def get_email_service(name: str = "stdout") -> EmailService:
+    if name == "stdout":
+        return StdoutEmailService()
+    else:
+        raise ValueError(f"Unknown email service {name}")
